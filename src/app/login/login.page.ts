@@ -32,8 +32,7 @@ export class LoginPage implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
       }
-
-      );
+    );
   }
 
 
