@@ -52,9 +52,9 @@ do facebook e google e sera responsivo utilizando os beneficios de um app hibrid
 
 
 <img src="mockup/feito.png" style="max-width:34%;width: 80px; display:block;margin:0 auto"></img>
-<center>
-    <img src="mockup/app.gif" width="300" style="max-width:34%;width: 80px; display:block;margin:0 auto"></img>
-</center>
+<p align="center">
+<img src="mockup/app.gif" width="300" style="max-width:34%;width: 80px; display:block;margin:0 auto"></img>
+</p>
 
 ## Sign up
 Em processo de desenvolvimento
