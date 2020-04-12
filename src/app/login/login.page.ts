@@ -1,8 +1,11 @@
-import { Component, OnInit }    from '@angular/core';
-import { AlertController }      from '@ionic/angular';
-import { HttpHeaders }          from '@angular/common/http';
-import { HttpClient }           from '@angular/common/http';
-import { Router }               from '@angular/router';
+import { Component, OnInit }                from '@angular/core';
+import { AlertController }                  from '@ionic/angular';
+import { HttpHeaders }                      from '@angular/common/http';
+import { HttpClient }                       from '@angular/common/http';
+import { Router }                           from '@angular/router';
+import { Device }                           from '@ionic-native/device/ngx';
+import { Facebook, FacebookLoginResponse }  from '@ionic-native/facebook/ngx';
+import { GooglePlus }                       from '@ionic-native/google-plus/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: 'login.page.html',
@@ -15,7 +18,14 @@ export class LoginPage implements OnInit {
   password: string;
   auth2: any;
   
-  constructor(public alertController: AlertController, public http: HttpClient, public router:Router) {}
+  constructor(
+    public alertController: AlertController, 
+    public http: HttpClient, 
+    public router:Router, 
+    private device: Device,
+    private fb: Facebook,
+    private googlePlus: GooglePlus
+    ) {}
 
   /**
    * Action POST login in system
@@ -97,7 +107,9 @@ export class LoginPage implements OnInit {
 
 
   loginFc() {
-    window['FB'].login((response) => {
+
+    if(this.device.platform == null){
+     window['FB'].login((response) => {
         console.log('login response',response);
         if (response.authResponse) {
 
@@ -115,10 +127,22 @@ export class LoginPage implements OnInit {
         } else {
           console.log('User login failed');
         }
-    }, {scope: 'email'});
+     }, {scope: 'email'});
+    }else{
+        this.loginFCNative()
+    }
   }
 
 
+  loginFCNative(){
+    this.fb.login(['public_profile', 'email'])
+    .then((res: FacebookLoginResponse) => {
+      console.log('Logged into Facebook!', res)
+      this.router.navigate(['/home'])
+     }
+    )
+    .catch(e => console.log('Error logging into Facebook', e));
+  }
 
  /**
   * GOOGLE SDK
@@ -136,7 +160,7 @@ export class LoginPage implements OnInit {
         scope: 'profile email'
       });
        
-      this.loginGoogle(document.getElementById('googleBtn'));
+      
     });
    }
  
@@ -151,10 +175,10 @@ export class LoginPage implements OnInit {
   }
 
 
-  loginGoogle(element:any) {
-
-  this.auth2.attachClickHandler(element, {},
-    (googleUser) => {
+  loginGoogle() {
+     if(this.device.platform == null){
+     this.auth2.attachClickHandler(document.getElementById('googleBtn'), {},
+      (googleUser) => {
 
       let profile = googleUser.getBasicProfile();
       console.log('Token || ' + googleUser.getAuthResponse().id_token);
@@ -164,11 +188,25 @@ export class LoginPage implements OnInit {
       console.log('Email: ' + profile.getEmail());
       //YOUR CODE HERE
       this.router.navigate(['/home']);
+    
+     }, (error) => {
+       console.log(error)
+       console.log(JSON.stringify(error, undefined, 2));
+     });
+    }else{
+        this.loginGoogleNative()
+    }
 
-    }, (error) => {
-      alert(JSON.stringify(error, undefined, 2));
-    });
 
+   }
+
+   loginGoogleNative(){
+    this.googlePlus.login({})
+    .then((res) => {
+      console.log(res)
+      this.router.navigate(['/home'])
+    })
+    .catch(err => console.error(err));
    }
 
 

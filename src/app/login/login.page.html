@@ -19,7 +19,7 @@
       </ion-col >
       <ion-col size="8" id="content-one">
         <ion-title class="title">WELCOME BACK!</ion-title>
-        <p>consectetur adipiscing elit. Duis ut.</p>
+        <p style="text-align:center" >consectetur adipiscing elit. Duis ut.</p>
       </ion-col>
       <ion-col size="2">
    
@@ -33,7 +33,7 @@
 
       <ion-col size="10" id="content-two">
         <label id="email-label"><ion-icon name="person-outline"></ion-icon></label>
-        <input id="email-input" [(ngModel)]="email" type="text" placeholder="E-mail">
+        <input id="email-input" [(ngModel)]="email" type="email" placeholder="E-mail">
       </ion-col>
       <ion-col size="1">
    
@@ -75,7 +75,7 @@
         <p>or connect using</p>
         <section>
           <button id=""          class="social-btn" style="background: #385c8e;" (click)="loginFc()"> <img style="max-width: 8px;" src="../../assets/icon/face.png" alt=""> Facebook</button>
-          <button id="googleBtn" class="social-btn" style="background: #f14436;" ><img src="../../assets/icon/google.png" alt=""> Google</button>
+          <button id="googleBtn" class="social-btn" style="background: #f14436;" (click)="loginGoogle()" ><img src="../../assets/icon/google.png" alt=""> Google</button>
         </section>
       </ion-col>
       
