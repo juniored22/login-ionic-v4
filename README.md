@@ -51,7 +51,6 @@ O App de login tera os métodos de autorização por API utilizando o JWT e aute
 do facebook e google e sera responsivo utilizando os beneficios de um app hibrido
 
 
-<img src="mockup/feito.png" style="max-width:34%;width: 80px; display:block;margin:0 auto"></img>
 <p align="center">
 <img src="mockup/app.gif" width="300" style="max-width:34%;width: 80px; display:block;margin:0 auto"></img>
 </p>
