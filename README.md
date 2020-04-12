@@ -4,7 +4,7 @@ Authentication app with framework ionic  v4 and social login Facebook aen Google
 
 ##  Configuration  
 
-###WEB
+### WEB
 [https://forum.ionicframework.com/t/key-hash-for-facebook-not-working/44357/5]
 Set APP_ID Facebbok developer in method FACEBOOK SDK in file login.page.ts  
 Set CLIENT_ID Google api in method GOOGLE SDK in file login.page.ts
